@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DiarioAlunos</string>
     <string name="ver_estatisticas_da_turma">Ver Estatísticas da Turma</string>
     <string name="estatisticas_da_turma">Estatísticas da Turma</string>
 </resources>

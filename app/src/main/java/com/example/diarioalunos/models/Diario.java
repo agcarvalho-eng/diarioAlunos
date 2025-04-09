@@ -10,14 +10,12 @@ import javax.annotation.processing.Generated;
 @Generated("jsonschema2pojo")
 public class Diario {
 
+    // Nome da chave Json
     @SerializedName("estudantes")
-    @Expose
+    @Expose // Este campo deve ser incluído no documento
     private List<Estudante> estudantes;
 
-    /**
-     * No args constructor for use in serialization
-     *
-     */
+    // Construtores.
     public Diario() {
     }
 
@@ -26,6 +24,7 @@ public class Diario {
         this.estudantes = estudantes;
     }
 
+    // Getters e setters
     public List<Estudante> getEstudantes() {
         return estudantes;
     }

@@ -10,22 +10,24 @@ import javax.annotation.processing.Generated;
 @Generated("jsonschema2pojo")
 public class Estudante implements Serializable {
 
+    // Nome da chave Json
     @SerializedName("nome")
-    @Expose
+    @Expose // Este campo deve ser incluído no documento
     private String nome;
+    // Nome da chave Json
     @SerializedName("idade")
-    @Expose
+    @Expose // Este campo deve ser incluído no documento
     private int idade;
     @SerializedName("notas")
-    @Expose
+    // Nome da chave Json
+    @Expose // Este campo deve ser incluído no documento
     private List<Double> notas;
+    // Nome da chave Json
     @SerializedName("presenca")
-    @Expose
+    @Expose // Este campo deve ser incluído no documento
     private List<Boolean> presenca;
 
-    /**
-     * No args constructor for use in serialization
-     */
+    // Construtores
     public Estudante() {
     }
 
@@ -37,6 +39,7 @@ public class Estudante implements Serializable {
         this.presenca = presenca;
     }
 
+    // Getters e setters
     public String getNome() {
         return nome;
     }
