@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EstatisticasActivity extends AppCompatActivity {
+    private Estudante estudante;
 
     // Método onCreate
     @Override
@@ -41,7 +42,7 @@ public class EstatisticasActivity extends AppCompatActivity {
         TextView textViewAprovados = findViewById(R.id.textViewAprovados);
         TextView textViewReprovados = findViewById(R.id.textViewReprovados);
 
-        // Cálculos
+        // Cria e inicializa as variáveis necessárias
         double somaMedias = 0;
         double somaIdades = 0;
         double maiorNota = -1;
@@ -54,10 +55,10 @@ public class EstatisticasActivity extends AppCompatActivity {
         // Percorre todos os alunos para calcular as estatísticas
         for (Estudante aluno : alunos) {
             // Calcula a média e a presença do aluno
-            double media = calcularMedia(aluno.getNotas());
-            double presenca = calcularPercentualPresenca(aluno.getPresenca());
+            double media = aluno.calcularMedia();
+            double presenca = aluno.calcularPercentualPresenca();
             // Verifica a situação (Aprovado ou Reprovado) do aluno
-            String situacao = verificarSituacao(media, presenca);
+            String situacao = aluno.verificarSituacao();
 
             // Atualiza as variáveis de soma de médias e idades
             somaMedias += media;
@@ -86,32 +87,5 @@ public class EstatisticasActivity extends AppCompatActivity {
         textViewMediaIdade.setText(String.format("Média de idade: %.1f anos", somaIdades / alunos.size()));
         textViewAprovados.setText("Aprovados: " + String.join(", ", aprovados));
         textViewReprovados.setText("Reprovados: " + String.join(", ", reprovados));
-    }
-
-    // Método para calcular a média das notas de um aluno
-    private double calcularMedia(List<Double> notas) {
-        if (notas == null || notas.isEmpty()) return 0;
-        double soma = 0;
-        for (Double nota : notas) {
-            soma += nota;
-        }
-        return soma / notas.size();
-    }
-
-    // Método para calcular o percentual de presença de um aluno
-    private double calcularPercentualPresenca(List<Boolean> presencas) {
-        if (presencas == null || presencas.isEmpty()) return 0;
-        int presentes = 0;
-        // Conta quantos "true" (presença) existem na lista
-        for (Boolean presente : presencas) {
-            if (presente) presentes++;
-        }
-        // Retorna o percentual de presença
-        return (presentes * 100.0) / presencas.size();
-    }
-
-    // Método para verificar se o aluno está aprovado ou reprovado
-    private String verificarSituacao(double media, double presenca) {
-        return (media >= 7 && presenca >= 75) ? "Aprovado" : "Reprovado";
     }
 }

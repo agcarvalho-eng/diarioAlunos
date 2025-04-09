@@ -50,15 +50,15 @@ public class DetalhesActivity extends AppCompatActivity {
         textViewIdade.setText("Idade: " + aluno.getIdade() + " anos");
 
         // Calcula a média das notas do aluno e exibe no TextView
-        double media = calcularMedia(aluno.getNotas());
+        double media = aluno.calcularMedia();
         textViewMedia.setText(String.format("Média: %.2f", media));
 
         // Calcula o percentual de presença do aluno e exibe no TextView
-        double presencaPercentual = calcularPercentualPresenca(aluno.getPresenca());
+        double presencaPercentual = aluno.calcularPercentualPresenca();
         textViewPresenca.setText(String.format("Frequência: %.1f%%", presencaPercentual));
 
         // Verifica a situação do aluno e exibe no TextView (Aprovado ou Reprovado)
-        String situacao = verificarSituacao(media, presencaPercentual);
+        String situacao = aluno.verificarSituacao();
         textViewSituacao.setText("Situação: " + situacao);
 
         // Define o que acontece quando o botão de estatísticas é clicado
@@ -75,46 +75,6 @@ public class DetalhesActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    // Método para calcular a média das notas do aluno
-    private double calcularMedia(List<Double> notas) {
-        // Se a lista de notas for nula ou vazia, retorna 0
-        if (notas == null || notas.isEmpty()) return 0;
-
-        // Variável para somar as notas
-        double soma = 0;
-
-        // Percorre cada nota e adiciona ao total
-        for (Double nota : notas) {
-            soma += nota;
-        }
-
-        // Retorna a média das notas
-        return soma / notas.size();
-    }
-
-    // Método para calcular o percentual de presença do aluno
-    private double calcularPercentualPresenca(List<Boolean> presencas) {
-        // Se a lista de presenças for nula ou vazia, retorna 0
-        if (presencas == null || presencas.isEmpty()) return 0;
-
-        // Conta quantas presenças o aluno teve
-        int presentes = 0;
-
-        // Percorre a lista de presenças e conta quantos "true" (presença) existem
-        for (Boolean presente : presencas) {
-            if (presente) presentes++;
-        }
-
-        // Retorna o percentual de presença (número de presenças dividido pelo total de aulas)
-        return (presentes * 100.0) / presencas.size();
-    }
-
-    // Método para verificar a situação do aluno (Aprovado ou Reprovado)
-    private String verificarSituacao(double media, double presenca) {
-        // O aluno é aprovado se a média for maior ou igual a 7 e a presença for maior ou igual a 75%
-        return (media >= 7 && presenca >= 75) ? "Aprovado" : "Reprovado";
     }
 }
 

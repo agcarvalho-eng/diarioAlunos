@@ -72,6 +72,48 @@ public class Estudante implements Serializable {
         this.presenca = presenca;
     }
 
+    // Método para calcular a média das notas do aluno
+    public double calcularMedia() {
+        // Se a lista de notas for nula ou vazia, retorna 0
+        if (notas == null || notas.isEmpty()) return 0;
+
+        // Variável para somar as notas
+        double soma = 0;
+
+        // Percorre cada nota e adiciona ao total
+        for (Double nota : notas) {
+            soma += nota;
+        }
+
+        // Retorna a média das notas
+        return soma / notas.size();
+    }
+
+    // Método para calcular o percentual de presença do aluno
+    public double calcularPercentualPresenca() {
+        // Se a lista de presenças for nula ou vazia, retorna 0
+        if (presenca == null || presenca.isEmpty()) return 0;
+
+        // Conta quantas presenças o aluno teve
+        int presentes = 0;
+
+        // Percorre a lista de presenças e conta quantos "true" (presença) existem
+        for (Boolean presente : presenca) {
+            if (presente) presentes++;
+        }
+
+        // Retorna o percentual de presença (número de presenças dividido pelo total de aulas)
+        return (presentes * 100.0) / presenca.size();
+    }
+
+    // Método para verificar a situação do aluno (Aprovado ou Reprovado)
+    public String verificarSituacao() {
+        double media = calcularMedia();
+        double presencaPercentual = calcularPercentualPresenca();
+        // O aluno é aprovado se a média for maior ou igual a 7 e a presença for maior ou igual a 75%
+        return (media >= 7 && presencaPercentual >= 75) ? "Aprovado" : "Reprovado";
+    }
+
     @Override
     public String toString() {
         return "Estudante{" +
